@@ -1,0 +1,28 @@
+{
+  "auth": {
+    "loginTitle": "Sign in",
+    "loginSubtitle": "Use your phone and password to book a haircut.",
+    "registerTitle": "Create account",
+    "registerSubtitle": "Register with phone and password to make bookings.",
+    "adminTitle": "Admin login",
+    "adminSubtitle": "Sign in to manage appointments.",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "password": "Password",
+    "submitLogin": "Sign in",
+    "submitRegister": "Register",
+    "submitting": "Please wait…",
+    "failed": "Invalid phone or password.",
+    "adminFailed": "Invalid email or password.",
+    "registerFailed": "Could not register. Please try again.",
+    "phoneTaken": "This phone is already registered.",
+    "phoneInvalid": "Invalid phone number. Use 10–15 digits, e.g. +7 999 123-45-67.",
+    "logout": "Log out",
+    "login": "Log in",
+    "register": "Register",
+    "toRegister": "No account? Register",
+    "toLogin": "Already registered? Sign in",
+    "adminLink": "Admin login"
+  }
+}

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+    --font-display: "Bebas Neue", sans-serif;
+    --font-body: "Manrope", sans-serif;
+    --color-ink: #12100e;
+    --color-ink-soft: #2a241f;
+    --color-paper: #f3ebe0;
+    --color-paper-dim: #e6d9c8;
+    --color-brass: #b8924a;
+    --color-brass-bright: #d4b06a;
+    --color-muted: #8a7d6d;
+    --color-danger: #a33b2b;
+    --color-ok: #2f6b4f;
+    --animate-rise: rise 0.7s ease both;
+    --animate-rise-slow: rise 0.8s ease both;
+    --animate-float: float 4.5s ease-in-out infinite;
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-18deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(-12deg);
+    }
+}
+
+@layer base {
+    body {
+        @apply m-0 min-h-full bg-gradient-to-br from-[#f7f1e8] via-[#ebe1d2] to-[#e2d5c3] bg-fixed font-body text-ink antialiased;
+    }
+
+    #app {
+        @apply min-h-full;
+    }
+
+    a {
+        @apply text-inherit no-underline;
+    }
+
+    button,
+    input,
+    select {
+        @apply font-[inherit];
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+}

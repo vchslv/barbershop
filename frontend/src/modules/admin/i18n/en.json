@@ -1,0 +1,32 @@
+{
+  "admin": {
+    "title": "Admin — appointments",
+    "subtitle": "Manually edit booking details, time, barber, and status.",
+    "filterDate": "Filter by date",
+    "filterStatus": "Status",
+    "statusAll": "All",
+    "reset": "Reset filters",
+    "loading": "Loading…",
+    "empty": "No appointments found.",
+    "edit": "Edit",
+    "editing": "Editing appointment #{id}",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "cancelEdit": "Cancel",
+    "clientName": "Client name",
+    "clientPhone": "Phone",
+    "service": "Service",
+    "barber": "Barber",
+    "date": "Date",
+    "time": "Time",
+    "status": "Status",
+    "statusConfirmed": "confirmed",
+    "statusCancelled": "cancelled",
+    "loadingSlots": "Loading slots…",
+    "noSlots": "No free slots for this selection.",
+    "loadFailed": "Could not load appointments.",
+    "saved": "Appointment updated.",
+    "saveFailed": "Could not save appointment.",
+    "selectAppointment": "Select an appointment to edit."
+  }
+}

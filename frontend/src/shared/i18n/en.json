@@ -1,0 +1,30 @@
+{
+  "common": {
+    "meta": {
+      "title": "BARBER — book a haircut"
+    },
+    "brand": {
+      "nameLeft": "BAR",
+      "nameRight": "BER",
+      "tagline": "Haircut booking"
+    },
+    "nav": {
+      "book": "Book now",
+      "appointments": "My appointments",
+      "admin": "Admin"
+    },
+    "locale": {
+      "label": "Language",
+      "en": "EN",
+      "ru": "RU"
+    },
+    "errors": {
+      "outside_hours": "Selected time is outside working hours (10:00–20:00).",
+      "slot_taken": "This time is already taken. Choose another slot.",
+      "slot_in_past": "This time has already passed. Choose another slot.",
+      "already_cancelled": "This appointment is already cancelled.",
+      "appointment_started": "An appointment that has already started can't be cancelled.",
+      "generic": "Something went wrong."
+    }
+  }
+}

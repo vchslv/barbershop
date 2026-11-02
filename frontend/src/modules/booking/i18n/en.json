@@ -1,0 +1,28 @@
+{
+  "booking": {
+    "heroTitle": "BOOK A HAIRCUT",
+    "heroText": "Choose a service, barber, and time that works for you. Open daily from 10:00 to 20:00.",
+    "service": "Service",
+    "barber": "Barber",
+    "date": "Date",
+    "duration": "Duration",
+    "durationValue": "{minutes} min",
+    "durationEmpty": "—",
+    "availableTimes": "Available times",
+    "loadingSlots": "Loading slots…",
+    "pickServiceBarberDate": "Choose a service, barber, and date.",
+    "serviceMeta": "{minutes} min · {price}",
+    "yourName": "Your name",
+    "namePlaceholder": "Alex",
+    "phone": "Phone",
+    "phonePlaceholder": "+1 555 000-0000",
+    "submit": "Book appointment",
+    "submitting": "Saving…",
+    "viewAppointments": "View appointments",
+    "noSlots": "No free slots for this date. Pick another day or barber.",
+    "slotsLoadFailed": "Could not load available slots.",
+    "catalogLoadFailed": "Could not load data. Make sure the API is running.",
+    "createFailed": "Could not create the appointment.",
+    "success": "Done! {name}, you are booked for {date} at {time}."
+  }
+}

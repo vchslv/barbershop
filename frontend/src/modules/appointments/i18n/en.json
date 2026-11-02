@@ -1,0 +1,17 @@
+{
+  "appointments": {
+    "title": "My appointments",
+    "filterDate": "Filter by date",
+    "reset": "Reset",
+    "new": "New booking",
+    "loading": "Loading…",
+    "empty": "No appointments yet.",
+    "cancel": "Cancel",
+    "confirmCancel": "Cancel this appointment?",
+    "cancelledOk": "Appointment cancelled.",
+    "loadFailed": "Could not load appointments.",
+    "cancelFailed": "Could not cancel the appointment.",
+    "statusConfirmed": "confirmed",
+    "statusCancelled": "cancelled"
+  }
+}
