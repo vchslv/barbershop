@@ -4,6 +4,10 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+  statuses: write
+
 jobs:
   frontend:
     runs-on: ubuntu-latest
@@ -37,6 +41,16 @@ jobs:
             '',
           ].join('\n'));
           EOF
+      - name: Show frontend coverage on the commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PCT=$(node --input-type=module -e "import { readFileSync } from 'node:fs'; const total = JSON.parse(readFileSync('coverage/coverage-summary.json', 'utf8')).total; process.stdout.write(String(total.lines.pct))")
+          gh api "repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -f state=success \
+            -f context="coverage/frontend" \
+            -f description="Lines ${PCT}%" \
+            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
   backend:
     runs-on: ubuntu-latest
@@ -52,4 +66,13 @@ jobs:
       - run: composer install --no-interaction --prefer-dist
       - run: vendor/bin/phpunit --coverage-text --coverage-clover clover.xml
       - name: Publish backend coverage
-        run: php -r '$xml=simplexml_load_file("clover.xml"); $m=$xml->project->metrics; $lines=(int)$m["statements"]; $covered=(int)$m["coveredstatements"]; $pct=$lines?round($covered/$lines*100,2):0; file_put_contents(getenv("GITHUB_STEP_SUMMARY"), "### Backend coverage\n\n| | Covered |\n|---|---:|\n| Lines | {$pct}% |\n", FILE_APPEND);'
+        run: php -r '$xml=simplexml_load_file("clover.xml"); $m=$xml->project->metrics; $lines=(int)$m["statements"]; $covered=(int)$m["coveredstatements"]; $pct=$lines?round($covered/$lines*100,2):0; file_put_contents(getenv("GITHUB_STEP_SUMMARY"), "### Backend coverage\n\n| | Covered |\n|---|---:|\n| Lines | {$pct}% |\n", FILE_APPEND); file_put_contents("coverage-pct.txt", $pct);'
+      - name: Show backend coverage on the commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -f state=success \
+            -f context="coverage/backend" \
+            -f description="Lines $(cat coverage-pct.txt)%" \
+            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
