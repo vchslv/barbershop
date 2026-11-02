@@ -7,6 +7,12 @@ export default defineConfig({
     plugins: [vue(), tailwindcss()],
     test: {
         environment: 'happy-dom',
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'json-summary'],
+            include: ['src/**/*.{ts,vue}'],
+            exclude: ['src/**/*.test.ts'],
+        },
     },
     resolve: {
         alias: {

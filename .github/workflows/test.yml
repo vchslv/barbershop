@@ -18,7 +18,25 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - run: yarn test
+      - run: yarn vitest run --coverage
+      - name: Publish frontend coverage
+        run: |
+          node --input-type=module <<'EOF'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const total = JSON.parse(readFileSync('coverage/coverage-summary.json', 'utf8')).total;
+          const row = (name, key) => `| ${name} | ${total[key].pct}% |`;
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+            '### Frontend coverage',
+            '',
+            '| | Covered |',
+            '|---|---:|',
+            row('Lines', 'lines'),
+            row('Statements', 'statements'),
+            row('Branches', 'branches'),
+            row('Functions', 'functions'),
+            '',
+          ].join('\n'));
+          EOF
 
   backend:
     runs-on: ubuntu-latest
@@ -30,6 +48,8 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          coverage: none
+          coverage: pcov
       - run: composer install --no-interaction --prefer-dist
-      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpunit --coverage-text --coverage-clover clover.xml
+      - name: Publish backend coverage
+        run: php -r '$xml=simplexml_load_file("clover.xml"); $m=$xml->project->metrics; $lines=(int)$m["statements"]; $covered=(int)$m["coveredstatements"]; $pct=$lines?round($covered/$lines*100,2):0; file_put_contents(getenv("GITHUB_STEP_SUMMARY"), "### Backend coverage\n\n| | Covered |\n|---|---:|\n| Lines | {$pct}% |\n", FILE_APPEND);'
