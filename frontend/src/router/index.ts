@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, type Router } from 'vue-router';
+import { authRedirect } from 'src/router/authGuard';
 import { routes } from 'src/router/routes';
 import { useAuthStore } from 'src/store/auth';
 
@@ -19,22 +20,10 @@ export const useAppRouter = (): Router => {
                 await authStore.bootstrap();
             }
 
-            if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-                return {
-                    name: 'login',
-                    query: { redirect: to.fullPath },
-                };
-            }
-
-            if (to.meta.requiresAdmin && !authStore.isAdmin) {
-                return { name: 'booking' };
-            }
-
-            if (to.meta.guestOnly && authStore.isAuthenticated) {
-                return authStore.isAdmin ? { name: 'admin' } : { name: 'booking' };
-            }
-
-            return true;
+            return authRedirect(to, {
+                isAuthenticated: authStore.isAuthenticated,
+                isAdmin: authStore.isAdmin,
+            });
         });
     }
 

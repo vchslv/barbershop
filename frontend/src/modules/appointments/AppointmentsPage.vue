@@ -5,6 +5,7 @@ import { useTranslate } from 'src/shared/i18n';
 import { useAppointmentsStore } from 'src/store/appointments';
 import { useLocaleStore } from 'src/store/locale';
 import type { Appointment } from 'src/services/types';
+import { canCancelAppointment } from 'src/utils/appointment';
 import { formatDate, formatPrice, formatTime } from 'src/utils/format';
 import {
     btnClass,
@@ -31,15 +32,7 @@ const {
     lastErrorCode,
 } = storeToRefs(appointmentsStore);
 
-const canCancel = (item: Appointment): boolean => {
-    if (item.status === 'cancelled') {
-        return false;
-    }
-
-    const start = new Date(`${String(item.date).slice(0, 10)}T${formatTime(item.start_time)}:00`);
-
-    return start.getTime() > Date.now();
-};
+const canCancel = (item: Appointment): boolean => canCancelAppointment(item);
 
 const displayMessage = computed((): string => {
     if (!message.value) {

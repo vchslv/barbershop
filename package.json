@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "yarn --cwd frontend test"
+  }
+}
